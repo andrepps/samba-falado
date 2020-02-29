@@ -3,18 +3,20 @@ import requests
 import re
 from datetime import datetime
 
+from flask import url_for, redirect, flash
 from app import db
 from app.models import Musica, Compositor, Usuario
 from flask_bcrypt import Bcrypt
 
-
-bs = BeautifulSoup
-novo_user = Usuario(nome='Samba Falado', 
+@bp_usuarios.route('/scrapper/')
+{    def scraper:
+    bs = BeautifulSoup
+    novo_user = Usuario(nome='Samba Falado', 
                     email='sambafalado@email.com', 
                     senha=Bcrypt().generate_password_hash('heitor').decode('utf-8'), 
                     permissao='2')
-db.session.add(novo_user)
-for ano in range(2009,2014):
+    db.session.add(novo_user)
+    for ano in range(2009,2014):
     for mes in range(1,13):
         url = 'http://sambafalado.blogspot.com/'+str(ano)+'/'+str(mes).zfill(2)+'/'
         print(url)
@@ -62,4 +64,6 @@ for ano in range(2009,2014):
             db.session.commit()
                 
                 
-            print(f'{nome_da_musica} ({comps})') ##
+            print(f'{nome_da_musica} ({comps})') ##}
+            flash('Parece que deu certo!')
+    return redirect(url_for('bp_main.main')
