@@ -9,7 +9,7 @@ from app.models import Musica, Compositor, Usuario
 from flask_bcrypt import Bcrypt
 
 @bp_usuarios.route('/scrapper/', methods=['GET', 'POST'])
-    def scraper:
+def scraper():
     bs = BeautifulSoup
     novo_user = Usuario(nome='Samba Falado', 
                     email='sambafalado@gmail.com', 
