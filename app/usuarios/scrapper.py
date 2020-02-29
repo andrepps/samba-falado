@@ -27,7 +27,7 @@ def scraper():
                 
                 result_datetime = result.abbr['title']
                 print('result_datetime')
-                result_datetime = datetime.fromisoformat(result_datetime)
+                #result_datetime = datetime.fromisoformat(result_datetime)
 
                 result_letra = result.find('div', class_='post-body entry-content')
                 for br in result_letra.find_all('br'):
