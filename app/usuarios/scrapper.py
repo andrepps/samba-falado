@@ -9,10 +9,10 @@ from app.models import Musica, Compositor, Usuario
 from flask_bcrypt import Bcrypt
 
 @bp_usuarios.route('/scrapper/')
-{    def scraper:
+    def scraper:
     bs = BeautifulSoup
     novo_user = Usuario(nome='Samba Falado', 
-                    email='sambafalado@email.com', 
+                    email='sambafalado@gmail.com', 
                     senha=Bcrypt().generate_password_hash('heitor').decode('utf-8'), 
                     permissao='2')
     db.session.add(novo_user)
