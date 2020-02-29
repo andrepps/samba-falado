@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from datetime import datetime
-
+from . import bp_usuarios
 from flask import url_for, redirect, flash
 from app import db
 from app.models import Musica, Compositor, Usuario
