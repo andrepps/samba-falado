@@ -19,14 +19,14 @@ def scraper():
     for ano in range(2009,2014):
         for mes in range(1,13):
             url = 'http://sambafalado.blogspot.com/'+str(ano)+'/'+str(mes).zfill(2)+'/'
-            print(url)
+            #print(url)
             source = requests.get(url).text
             
             soup = bs(source,'lxml')
             for result in soup.find_all('div', class_='post-outer'):
                 
                 result_datetime = result.abbr['title']
-                print('result_datetime')
+                #print('result_datetime')
                 #result_datetime = datetime.fromisoformat(result_datetime)
 
                 result_letra = result.find('div', class_='post-body entry-content')
@@ -52,7 +52,7 @@ def scraper():
                                     enviado_em=result_datetime)
                 db.session.add(nova_musica)
                 
-                comps=[] ##
+                #comps=[] ##
                 for compositor in compositores:
                     query_compositor = Compositor.query.filter_by(nome=compositor).first()
                     if not query_compositor:
@@ -60,10 +60,10 @@ def scraper():
                         db.session.add(novo_compositor)
                         nova_musica.compositores.append(novo_compositor)
                     else: nova_musica.compositores.append(query_compositor)
-                    comps.append(compositor) ##
+                    #comps.append(compositor) ##
                 db.session.commit()
                     
                     
-                print(f'{nome_da_musica} ({comps})') ##}
+                #print(f'{nome_da_musica} ({comps})') ##}
                 flash('Parece que deu certo!')
     return redirect(url_for('bp_main.main'))
