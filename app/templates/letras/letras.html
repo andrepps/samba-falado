@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+
+<ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
+  {% for letra, musicas in alfabeto.items() %}
+  <li class="nav-item">
+    <a
+      class="nav-link btn-light"
+      id="pills-{{letra}}-tab"
+      data-toggle="pill"
+      href="#pills-{{letra}}"
+      role="tab"
+      aria-controls="pills-{{letra}}"
+      aria-selected="false"
+      >{{letra}}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  {% for letra, musicas in alfabeto.items() %}
+  <div
+    class="tab-pane fade"
+    id="pills-{{letra}}"
+    role="tabpanel"
+    aria-labelledby="pills-{{letra}}-tab"
+  >
+    <div class="list-group list-group-flush">
+      {% for musica in musicas %}
+      {% set myList = [] %}
+      {% for compositor in musica.compositores %}
+        {% do myList.append(compositor.nome) %}
+      {% endfor %}
+      <a
+        href="{{ url_for('bp_letras.letra', id=musica.id)}}"
+        class="list-group-item list-group-item-action"
+      >
+        {{musica.nome}} <small>({{ myList|join(', ') }})</small>
+
+      </a>
+      <br />
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

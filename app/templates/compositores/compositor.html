@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-section">
+
+
+
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h4 class="mb-0">
+          
+          {{ compositor.nome }}
+        </h4>
+      </div>
+      
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            {% for musica in compositor.musicas %}
+
+            <a
+              href="{{ url_for('bp_letras.letra', id=musica.id)}}"
+              class="list-group-item list-group-item-action"
+            >
+              {{ musica.nome}} </a
+            ><br />
+            {% endfor %}
+          </div>
+        </div>
+      
+    </div>
+    
+
+    
+</div>
+
+
+
+
+
+
+ 
+
+{% endblock %}

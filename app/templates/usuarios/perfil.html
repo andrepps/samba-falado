@@ -1,0 +1,196 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content-section">
+  <div class="media">
+    <button
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#exampleModalCenter"
+    >
+      <img class="rounded-circle account-img" src="{{ foto }}" />
+    </button>
+    <div class="media-body">
+      <h2 class="account-heading">{{ current_user.nome }}</h2>
+      <p class="text-secondary">{{ current_user.email }}</p>
+      <br>
+      <a role="button" class="btn btn-dark" href="#">Configurações</a> 
+      {% if current_user.permissao == 2 %}
+      <a role="button" class="btn btn-dark" href="{{ url_for('bp_usuarios.convidar_revisor') }}">Convidar Revisores</a> 
+      {% endif %}
+    </div>
+  </div>
+  
+  
+  <!-- Modal -->
+  
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form method="POST" action="" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              {{ form.foto.label() }}
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <fieldset class="form-group">
+              <div class="form-group">
+                {{ form.foto(class="form-control-file") }} {% if
+                form.foto.errors %} {% for error in form.foto.errors %}
+                <span class="text-danger"> {{ error }} </span>
+                {% endfor %} {% endif %}
+              </div>
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <div class="form-group">
+              {{ form.submit_button(class="btn btn-dark") }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!--Modal end-->
+<br>
+
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+          <button
+            class="btn btn-link collapsed text-dark"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          ><h5 class="mb-0 ">
+            Letras Enviadas</h5>
+          </button>
+      </div>
+      <div
+        id="collapseTwo"
+        class="collapse"
+        aria-labelledby="headingTwo"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            {% for letra in enviadas %}
+
+            <a
+              href="{{ url_for('bp_letras.letra', id=letra.id)}}"
+              class="list-group-item list-group-item-action"
+            >
+              {{ letra.nome }} <small>(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }} )</small></a
+            ><br />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        
+          <button
+            class="btn btn-link collapsed text-dark"
+            data-toggle="collapse"
+            data-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          ><h5 class="mb-0 ">
+            Letras em Revisão</h5>
+          </button>
+        
+      </div>
+      <div
+        id="collapseThree"
+        class="collapse"
+        aria-labelledby="headingThree"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            {% for letra in em_revisao %}
+
+            <a
+              href="{{ url_for('bp_letras.letra', id=letra.id)}}"
+              class="list-group-item list-group-item-action"
+            >
+              {{ letra.nome }} <small>(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }} )</small> </a
+            ><br />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+
+    <div class="card">
+      <div class="card-header" id="headingFour">
+      
+          <button
+            class="btn btn-link collapsed text-dark"
+            data-toggle="collapse"
+            data-target="#collapseFour"
+            aria-expanded="false"
+            aria-controls="collapseFour"
+          ><h5 class="mb-0 ">
+            Letras Salvas</h5>
+          </button>
+      </div>
+      <div
+        id="collapseFour"
+        class="collapse"
+        aria-labelledby="headingFour"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            {% for musica in current_user.letras_em_revisao %}
+
+            <a
+              href="#"
+              class="list-group-item list-group-item-action"
+            >
+              </a
+            ><br />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+  {% endblock %}

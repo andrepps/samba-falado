@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+
+<ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
+  {% for letra, compositores in alfabeto.items() %}
+  <li class="nav-item">
+    <a
+      class="nav-link btn-light"
+      id="pills-{{letra}}-tab"
+      data-toggle="pill"
+      href="#pills-{{letra}}"
+      role="tab"
+      aria-controls="pills-{{letra}}"
+      aria-selected="false"
+      >{{letra}}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  {% for letra, compositores in alfabeto.items() %}
+  <div
+    class="tab-pane fade"
+    id="pills-{{letra}}"
+    role="tabpanel"
+    aria-labelledby="pills-{{letra}}-tab"
+  >
+    <div class="list-group list-group-flush">
+      {% for compositor in compositores %}
+
+      <a
+        href="{{ url_for('bp_compositores.compositor', id=compositor.id)}}"
+        class="list-group-item list-group-item-action"
+      >
+        {{compositor.nome}}
+      </a>
+      <br />
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

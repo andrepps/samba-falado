@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <title>Samba Falado</title>
+  </head>
+  <body>
+  <header> 
+        
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+        <a class="navbar-brand" href="{{ url_for('bp_main.main') }}">Samba Falado</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item ml-1">
+              <a class="nav-link" href="{{ url_for('bp_letras.letras') }}">Letras</a>
+            </li>
+            <li class="nav-item ml-1">
+                <a class="nav-link" href="{{ url_for('bp_compositores.compositores') }}">Compositores</a>
+              </li>
+              {% if current_user.is_authenticated %}
+              <li class="nav-item ml-1">
+                <a class="nav-link" href="{{ url_for('bp_letras.enviar') }}">Enviar Letra</a>
+              </li>
+              {% if current_user.permissao > 0 %}
+              <li class="nav-item ml-1">
+                <a class="nav-link" href="{{ url_for('bp_letras.em_revisao') }}">
+                  Revisar Letras <span class="badge badge-light">0</span>
+                </a>
+              </li>
+              {% endif %}
+              {% endif %}
+
+          </ul>
+          
+          
+   
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        {% if current_user.is_authenticated %}
+        <li class="nav-item ml-1">
+          <a class="nav-link" href="{{ url_for('bp_usuarios.perfil') }}">Perfil</a>
+        </li>
+        <li class="nav-item ml-1">
+          <a class="nav-link" href="{{ url_for('bp_usuarios.sair') }}">Sair</a>
+        </li>
+        {% else %}
+        <li class="nav-item ml-1">
+          <a class="nav-link" href="{{ url_for('bp_usuarios.entrar') }}">Entrar</a>
+        </li>
+        <li class="nav-item ml-1">
+          <a class="nav-link" href="{{ url_for('bp_usuarios.cadastrar') }}">Cadatrar</a>
+        </li>
+        {% endif %}
+      </li>      
+    </ul>  
+  </div>
+        </div> 
+        </nav>
+    
+</header>
+  <br><br><br>
+  <main role="main" class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{category}}">
+                {{ message }}
+              </div>
+            {% endfor%}
+          {% endif %}
+        {% endwith %}
+    <div class="row">
+      <div class="col-md-4">
+        
+        <div class="content-section">
+          
+          
+          <p class='text-muted'><center><h6>Dedicado a divulgar letras de Samba.</h6> </center>
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-light">
+                <form class="">
+                  <input class="form-control mr-sm-0" type="search" placeholder="Busca" aria-label="Search">
+                </form></li>
+           <!--   <li class="list-group-item list-group-item-light">Total de Letras: </li>
+              <li class="list-group-item list-group-item-light">Total de Compositores: </li>
+-->
+              </ul>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        {% block content %}{% endblock %}
+      </div>
+      
+    </div>
+  </main>
+    <br><br>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

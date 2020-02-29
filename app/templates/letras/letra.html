@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+<div class="card-header">
+
+<h4>{{ musica.nome }}
+</h4>
+<h5>   {% for compositor in musica.compositores %}
+<a class="text-muted" href="{{ url_for('bp_compositores.compositor', id=compositor.id)}}">{{ compositor.nome }}</a><br>
+{% endfor %}
+</h5>
+</div>
+<div class="card-body">
+<p class="card-text">
+<pre>{{musica.letra}}</pre></p>
+<div class="card-footer">Enviado por {{ musica.enviado_por.nome }} em {{ musica.enviado_em.strftime('%d-%m-%Y') }}
+{% if current_user.is_authenticated %}
+    {% if current_user.permissao > 0 %}
+
+    <br><br>
+<a role="button" class="btn btn-dark" href="{{ url_for('bp_letras.editar', id=musica.id) }}">Editar</a> 
+<a role="button" class="btn btn-danger" href="{{ url_for('bp_letras.apagar', id=musica.id) }}">Apagar</a> 
+    {% endif %}
+{% endif %}
+</div>
+</div>
+</div>
+<br>
+
+
+
+
+{% endblock %}
