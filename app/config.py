@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
 
@@ -14,4 +13,4 @@ class Config():
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', True)
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///teste.db'

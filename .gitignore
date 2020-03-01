@@ -5,3 +5,5 @@ NOTES
 rascunho
 .env
 migrations
+test-script.py
+teste.db
