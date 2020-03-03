@@ -34,10 +34,10 @@ def create_app(config_class=Config):
     from .usuarios import bp_usuarios
     from .letras import bp_letras
     from .compositores import bp_compositores
-    app.register_blueprint(bp_main)
-    app.register_blueprint(bp_usuarios)
-    app.register_blueprint(bp_letras)
-    app.register_blueprint(bp_compositores)
+    app.register_blueprint(bp_main, url_prefix='/sambafalado')
+    app.register_blueprint(bp_usuarios, url_prefix='/sambafalado')
+    app.register_blueprint(bp_letras, url_prefix='/sambafalado')
+    app.register_blueprint(bp_compositores, url_prefix='/sambafalado')
 
 
 
