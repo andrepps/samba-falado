@@ -23,12 +23,14 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     app.jinja_env.add_extension('jinja2.ext.do')
 
+
     db.init_app(app)
     ma.init_app(app)
     migrate.init_app(app,db)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)    
+
 
     from .main import bp_main
     from .usuarios import bp_usuarios

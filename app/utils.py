@@ -6,23 +6,26 @@ from app import mail
 from unidecode import unidecode
 from flask import current_app, url_for
 
+
 def avisar_novo_revisor(usuario):
     msg = Message('Convite para se tornar revisor do site Samba Falado', 
                     sender=('Samba Falado', 'sambafalado@gmail.com'),
-                    recipients=[usuario.email])
-    msg.body = f'''VocÊ agora é revisor do Samba Falado!
-    '''
+                    recipients=[usuario.email]
+                    )
+    msg.body = 'VocÊ agora é revisor do Samba Falado!'
     mail.send(msg)
 
-def revisor_token(usuario):
-    token = usuario.get_token(172800)
-    msg = Message('Convite para se tornar revisor do site Samba Falado', 
-                    sender=('Samba Falado', 'sambafalado@gmail.com'),
-                    recipients=[usuario.email])
-    msg.body = f'''Você recebeu um convite para se tornar revisor das letras enviadas para o Samba Falado. Para aceitar acesse o link
-    {url_for('bp_usuarios.novo_revisor', token=token, _external=True)}
-    '''
-    mail.send(msg)
+
+#def revisor_token(usuario):
+#    token = usuario.get_token(172800)
+#    msg = Message('Convite para se tornar revisor do site Samba Falado', 
+#                    sender=('Samba Falado', 'sambafalado@gmail.com'),
+#                    recipients=[usuario.email])
+#    msg.body = f'''Você recebeu um convite para se tornar revisor das letras enviadas para o Samba Falado. Para aceitar acesse o link
+#    {url_for('bp_usuarios.novo_revisor', token=token, _external=True)}
+#    '''
+#    mail.send(msg)##
+
 
 def enviar_token(usuario):
     token = usuario.get_token()
@@ -35,6 +38,7 @@ def enviar_token(usuario):
     Se você não requisitou a recuperação de senha ignore esta mensagem!
     '''
     mail.send(msg)
+
 
 def save_pic(form_pic):
     random_hex = secrets.token_hex(16)
@@ -57,6 +61,7 @@ def save_pic(form_pic):
     i.save(foto_path)
     return foto_filename
 
+
 def parseAlfabeto(data):
     alfabeto = {}
     data = sorted(data, key=lambda x: x.nome, reverse=False)
@@ -67,6 +72,7 @@ def parseAlfabeto(data):
         else:
             alfabeto[primeira_letra].append(item) 
     return alfabeto
+
 
 def parseComp(compositores):
     comp = []

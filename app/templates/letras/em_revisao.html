@@ -1,32 +1,28 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="card">
-
   <div class="card-header">
-  
-  <h4>Em Revisão
-  </h4>
-  
+    <h4>Em Revisão</h4>
   </div>
   <div class="card-body">
+    <div class="list-group list-group-flush">
+      {% for musica in musicas %}
 
-
-<div class="list-group list-group-flush">
-  {% for musica in musicas %}
-
-  <a
-    href="{{ url_for('bp_letras.revisar', id=musica.id)}}"
-    class="list-group-item list-group-item-action"
-  >
-    {{musica.nome}} ({{ musica.compositores }}) --  
-    <span> <small>Enviado por: {{ musica.enviado_por.nome }} em {{ musica.enviado_em.strftime('%d-%m-%Y') }} </small></span>
-  </a>
-  <br />
-  {% endfor %}
+      <a
+        href="{{ url_for('bp_letras.revisar', id=musica.id)}}"
+        class="list-group-item list-group-item-action"
+      >
+        {{musica.nome}} ({{ musica.compositores }}) --
+        <span>
+          <small
+            >Enviado por: {{ musica.enviado_por.nome }} em {{
+            musica.enviado_em.strftime('%d-%m-%Y') }}
+          </small></span
+        >
+      </a>
+      <br />
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
-</div></div>
-
 {% endblock %}
-

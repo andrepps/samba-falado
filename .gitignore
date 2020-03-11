@@ -7,3 +7,4 @@ rascunho
 migrations
 test-script.py
 teste.db
+.flaskenv

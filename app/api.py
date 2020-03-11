@@ -10,6 +10,7 @@ def getJsonMusicas():
     json_data = MusicaSchema(many=True).jsonify(musicas)
     return json_data # dump, dumps, jsonify
 
+
 @api.route('/api/compositores')
 def getJsonCompositores():
     compositores = Compositor.query.all()[::-1]

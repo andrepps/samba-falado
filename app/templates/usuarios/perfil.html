@@ -13,17 +13,21 @@
     <div class="media-body">
       <h2 class="account-heading">{{ current_user.nome }}</h2>
       <p class="text-secondary">{{ current_user.email }}</p>
-      <br>
-      <a role="button" class="btn btn-dark" href="#">Configurações</a> 
+      <br />
+      <a role="button" class="btn btn-dark" href="#">Configurações</a>
       {% if current_user.permissao == 2 %}
-      <a role="button" class="btn btn-dark" href="{{ url_for('bp_usuarios.convidar_revisor') }}">Convidar Revisores</a> 
+      <a
+        role="button"
+        class="btn btn-dark"
+        href="{{ url_for('bp_usuarios.convidar_revisor') }}"
+        >Convidar Revisores</a
+      >
       {% endif %}
     </div>
   </div>
-  
-  
+
   <!-- Modal -->
-  
+
   <div
     class="modal fade"
     id="exampleModalCenter"
@@ -75,22 +79,24 @@
       </div>
     </div>
   </div>
-  
+
   <!--Modal end-->
-<br>
+  <br />
 
   <div id="accordion">
     <div class="card">
       <div class="card-header" id="headingTwo">
-          <button
-            class="btn btn-link collapsed text-dark"
-            data-toggle="collapse"
-            data-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-          ><h5 class="mb-0 ">
-            Letras Enviadas</h5>
-          </button>
+        <button
+          class="btn btn-link collapsed text-dark"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          <h5 class="mb-0 ">
+            Letras Enviadas
+          </h5>
+        </button>
       </div>
       <div
         id="collapseTwo"
@@ -106,7 +112,11 @@
               href="{{ url_for('bp_letras.letra', id=letra.id)}}"
               class="list-group-item list-group-item-action"
             >
-              {{ letra.nome }} <small>(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }} )</small></a
+              {{ letra.nome }}
+              <small
+                >(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }}
+                )</small
+              ></a
             ><br />
             {% endfor %}
           </div>
@@ -118,17 +128,17 @@
 
     <div class="card">
       <div class="card-header" id="headingThree">
-        
-          <button
-            class="btn btn-link collapsed text-dark"
-            data-toggle="collapse"
-            data-target="#collapseThree"
-            aria-expanded="false"
-            aria-controls="collapseThree"
-          ><h5 class="mb-0 ">
-            Letras em Revisão</h5>
-          </button>
-        
+        <button
+          class="btn btn-link collapsed text-dark"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+        >
+          <h5 class="mb-0 ">
+            Letras em Revisão
+          </h5>
+        </button>
       </div>
       <div
         id="collapseThree"
@@ -144,7 +154,11 @@
               href="{{ url_for('bp_letras.letra', id=letra.id)}}"
               class="list-group-item list-group-item-action"
             >
-              {{ letra.nome }} <small>(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }} )</small> </a
+              {{ letra.nome }}
+              <small
+                >(Enviado em: {{ letra.enviado_em.strftime('%d-%m-%Y') }}
+                )</small
+              > </a
             ><br />
             {% endfor %}
           </div>
@@ -154,19 +168,19 @@
 
     <br />
 
-
     <div class="card">
       <div class="card-header" id="headingFour">
-      
-          <button
-            class="btn btn-link collapsed text-dark"
-            data-toggle="collapse"
-            data-target="#collapseFour"
-            aria-expanded="false"
-            aria-controls="collapseFour"
-          ><h5 class="mb-0 ">
-            Letras Salvas</h5>
-          </button>
+        <button
+          class="btn btn-link collapsed text-dark"
+          data-toggle="collapse"
+          data-target="#collapseFour"
+          aria-expanded="false"
+          aria-controls="collapseFour"
+        >
+          <h5 class="mb-0 ">
+            Letras Salvas
+          </h5>
+        </button>
       </div>
       <div
         id="collapseFour"
@@ -178,19 +192,14 @@
           <div class="list-group list-group-flush">
             {% for musica in current_user.letras_em_revisao %}
 
-            <a
-              href="#"
-              class="list-group-item list-group-item-action"
-            >
-              </a
+            <a href="#" class="list-group-item list-group-item-action"> </a
             ><br />
             {% endfor %}
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>
 
-  {% endblock %}
+{% endblock %}

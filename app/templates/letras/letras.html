@@ -25,17 +25,14 @@
     aria-labelledby="pills-{{letra}}-tab"
   >
     <div class="list-group list-group-flush">
-      {% for musica in musicas %}
-      {% set myList = [] %}
-      {% for compositor in musica.compositores %}
-        {% do myList.append(compositor.nome) %}
-      {% endfor %}
+      {% for musica in musicas %} {% set myList = [] %} {% for compositor in
+      musica.compositores %} {% do myList.append(compositor.nome) %} {% endfor
+      %}
       <a
         href="{{ url_for('bp_letras.letra', id=musica.id)}}"
         class="list-group-item list-group-item-action"
       >
         {{musica.nome}} <small>({{ myList|join(', ') }})</small>
-
       </a>
       {% endfor %}
     </div>
